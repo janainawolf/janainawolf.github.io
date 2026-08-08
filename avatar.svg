@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Avatar de Janaina Wolf">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2d3a5a"/>
+      <stop offset="100%" stop-color="#151a2b"/>
+    </linearGradient>
+    <linearGradient id="hair" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f093fb"/>
+      <stop offset="100%" stop-color="#f5576c"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="40" fill="url(#bg)" />
+  <circle cx="100" cy="74" r="46" fill="#f0e9ff" opacity="0.95" />
+  <path d="M54 144c30-32 84-32 114 0v18c0 14-12 26-26 26H80c-14 0-26-12-26-26v-18Z" fill="#f0e9ff" opacity="0.95" />
+  <path d="M64 64c0-16 14-30 30-30s30 14 30 30" fill="none" stroke="url(#hair)" stroke-width="14" stroke-linecap="round" />
+  <circle cx="82" cy="78" r="8" fill="#2d3a5a" />
+  <circle cx="118" cy="78" r="8" fill="#2d3a5a" />
+  <path d="M78 102c8 6 16 6 24 0" fill="none" stroke="#2d3a5a" stroke-width="6" stroke-linecap="round" />
+  <path d="M58 60c10-22 34-32 54-24" fill="none" stroke="url(#hair)" stroke-width="10" stroke-linecap="round" />
+  <path d="M142 60c-10-22-34-32-54-24" fill="none" stroke="url(#hair)" stroke-width="10" stroke-linecap="round" />
+  <circle cx="100" cy="100" r="70" fill="none" stroke="rgba(247,161,196,0.2)" stroke-width="18" />
+</svg>

@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+  <meta name="description" content="Portfólio de Janaina Wolf, desenvolvedora em transição para a área de Tecnologia. Projetos em Cloud Computing, AWS, Java, Git e GitHub.">
+  <meta property="og:title" content="Janaina Wolf · Portfólio GitHub">
+  <meta property="og:description" content="Portfólio de Janaina Wolf com projetos públicos do GitHub.">
+  <meta property="og:type" content="website">
+  <title>Janaina Wolf · Portfólio GitHub</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* Reset & base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+      background: linear-gradient(145deg, #0b0e1a 0%, #141a2b 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+      color: #eef2fb;
+    }
+
+    .portfolio {
+      max-width: 1400px;
+      width: 100%;
+    }
+
+    /* Cabeçalho com avatar */
+    .header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 3rem;
+      gap: 1.2rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 1.8rem;
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    /* Container do avatar com imagem */
+    .avatar-wrapper {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      padding: 3px; /* borda gradiente */
+      flex-shrink: 0;
+      box-shadow: 0 8px 20px rgba(245, 87, 108, 0.3);
+      transition: transform 0.2s;
+    }
+
+    .avatar-wrapper:hover {
+      transform: scale(1.03);
+    }
+
+    .avatar {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: #141a2b; /* fallback caso a imagem não carregue */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      object-fit: cover;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 50%;
+    }
+
+    /* fallback ícone caso a imagem não exista */
+    .avatar .fallback-icon {
+      font-size: 2.2rem;
+      color: #f7a1c4;
+      background: #141a2b;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+
+    .profile-text h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      background: linear-gradient(to right, #f5b8ea, #f7a1c4);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.5px;
+    }
+
+    .profile-text p {
+      color: #a7b5d9;
+      font-size: 1rem;
+      margin-top: 0.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .profile-text p i {
+      color: #f5576c;
+      font-size: 0.9rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1.2rem;
+      font-size: 1.4rem;
+    }
+
+    .social-links a {
+      color: #b2c2e8;
+      transition: 0.2s;
+    }
+
+    .social-links a:hover {
+      color: #f7a1c4;
+      transform: translateY(-2px);
+    }
+
+    /* Seção "Meus Repositórios" */
+    .section-title {
+      display: flex;
+      align-items: baseline;
+      gap: 0.8rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .section-title h2 {
+      font-weight: 500;
+      font-size: 1.6rem;
+      letter-spacing: 0.5px;
+      color: #d6e0ff;
+    }
+
+    .about {
+      margin-bottom: 2.4rem;
+      color: #c8d2ef;
+      font-size: 1rem;
+      line-height: 1.8;
+      max-width: 780px;
+    }
+
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .skills-list span {
+      background: rgba(245, 87, 108, 0.16);
+      color: #f7a1c4;
+      padding: 0.5rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+    }
+
+    .section-title span {
+      background: rgba(245, 87, 108, 0.18);
+      padding: 0.2rem 0.8rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #f7a1c4;
+      border: 1px solid rgba(245, 87, 108, 0.2);
+    }
+
+    /* Grid de cartões responsivo */
+    .repo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.8rem;
+    }
+
+    /* Cartão */
+    .repo-card {
+      background: rgba(22, 30, 50, 0.65);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: 28px;
+      padding: 1.8rem 1.5rem 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.6);
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .repo-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #f093fb, #f5576c, #f7a1c4);
+      opacity: 0.6;
+      transition: opacity 0.3s;
+    }
+
+    .repo-card:hover {
+      transform: translateY(-8px);
+      background: rgba(30, 40, 65, 0.8);
+      border-color: rgba(245, 87, 108, 0.25);
+      box-shadow: 0 25px 40px -12px #0b0e1a;
+    }
+
+    .repo-card:hover::before {
+      opacity: 1;
+    }
+
+    .repo-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.8rem;
+    }
+
+    .repo-name {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #f0f4ff;
+      letter-spacing: -0.3px;
+      word-break: break-word;
+    }
+
+    .repo-name i {
+      color: #f7a1c4;
+      margin-right: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .repo-visibility {
+      font-size: 0.7rem;
+      background: rgba(167, 181, 217, 0.12);
+      padding: 0.2rem 0.7rem;
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      color: #a7b5d9;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .repo-description {
+      color: #bfcef0;
+      font-size: 0.92rem;
+      line-height: 1.5;
+      margin: 0.6rem 0 1.2rem;
+      flex: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      opacity: 0.9;
+    }
+
+    .repo-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem 1.5rem;
+      margin-top: 0.4rem;
+      font-size: 0.8rem;
+      color: #8b9ed1;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      padding-top: 0.9rem;
+    }
+
+    .repo-meta i {
+      margin-right: 0.3rem;
+      color: #f7a1c4;
+      width: 1.1rem;
+    }
+
+    .repo-meta .lang-color {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin-right: 0.25rem;
+      background: #f1e05a;
+    }
+
+    .repo-stats {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .repo-stats span {
+      display: flex;
+      align-items: center;
+      gap: 0.2rem;
+    }
+
+    .repo-link {
+      margin-top: 0.8rem;
+      text-align: right;
+    }
+
+    .repo-link a {
+      color: #f7a1c4;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: 0.2s;
+      border-bottom: 1px dotted transparent;
+    }
+
+    .repo-link a:hover {
+      color: #f093fb;
+      border-bottom-color: #f093fb;
+    }
+
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 4rem 2rem;
+      background: rgba(22, 30, 50, 0.3);
+      border-radius: 40px;
+      backdrop-filter: blur(3px);
+      border: 1px dashed rgba(255, 255, 255, 0.1);
+    }
+
+    .empty-state i {
+      font-size: 3rem;
+      color: #f5576c;
+      opacity: 0.6;
+      margin-bottom: 0.8rem;
+    }
+
+    .empty-state p {
+      color: #a7b5d9;
+    }
+
+    .footer {
+      margin-top: 4rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #5b6f9e;
+      border-top: 1px solid rgba(255, 255, 255, 0.03);
+      padding-top: 2rem;
+    }
+
+    .footer i {
+      color: #f5576c;
+      margin: 0 0.2rem;
+    }
+
+    @media (max-width: 640px) {
+      body { padding: 1rem; }
+      .header { flex-direction: column; align-items: flex-start; gap: 0.8rem; }
+      .profile-text h1 { font-size: 1.6rem; }
+      .social-links { font-size: 1.2rem; }
+      .repo-grid { gap: 1.2rem; }
+      .repo-card { padding: 1.5rem 1.2rem; }
+      .section-title h2 { font-size: 1.3rem; }
+      .avatar-wrapper { width: 60px; height: 60px; }
+    }
+
+    @media (max-width: 400px) {
+      .repo-meta { flex-direction: column; align-items: flex-start; gap: 0.4rem; }
+    }
+  </style>
+</head>
+<body>
+  <main class="portfolio">
+
+    <!-- Cabeçalho com AVATAR -->
+    <header class="header">
+      <div class="profile">
+        <div class="avatar-wrapper">
+          <div class="avatar">
+            <img src="avatar.svg" alt="Avatar de Janaina Wolf" id="userAvatar">
+          </div>
+        </div>
+        <div class="profile-text">
+          <h1>Janaina Wolf</h1>
+          <p><i class="fas fa-map-pin"></i> Jaguariúna, BR · <i class="fas fa-github-alt"></i> @JanaMalaquias</p>
+        </div>
+      </div>
+      <div class="social-links">
+        <a href="https://github.com/JanaMalaquias" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/janainawolf" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </header>
+
+    <section class="about">
+      <p>Em transição para a área de Tecnologia. Aprendendo todos os dias com foco em Cloud Computing, AWS, Java, Git e GitHub. Aqui estão meus projetos públicos mais recentes e meu trabalho em desenvolvimento Web e automação.</p>
+      <div class="skills-list">
+        <span>Cloud Computing</span>
+        <span>AWS</span>
+        <span>Java</span>
+        <span>Git</span>
+        <span>HTML/CSS</span>
+      </div>
+    </section>
+
+    <section aria-labelledby="reposTitle">
+      <div class="section-title">
+        <h2 id="reposTitle"><i class="fas fa-archive" style="color: #f7a1c4; margin-right: 0.5rem;"></i>Repositórios</h2>
+        <span>6 projetos</span>
+      </div>
+      <div class="repo-grid" id="repoGrid">
+        <!-- renderizado via JavaScript -->
+      </div>
+    </section>
+
+    <footer class="footer">
+      <i class="fas fa-heart"></i>  construído com  ·  portfólio dinâmico
+    </footer>
+  </main>
+
+  <script>
+    (function() {
+      // ---- Dados dos repositórios ----
+      const repos = [
+        {
+          id: 1,
+          name: 'Pedidos-Lanchonete--2026',
+          description: 'Sistema web para gerenciamento de pedidos de lanchonete, com cardápio interativo e carrinho de compras.',
+          language: 'CSS',
+          languageColor: '#563d7c',
+          stars: 1,
+          forks: 0,
+          visibility: 'public',
+          url: 'https://github.com/JanaMalaquias/Pedidos-Lanchonete--2026'
+        },
+        {
+          id: 2,
+          name: 'Fake-ChatGPT-2026',
+          description: 'Interface inspirada em assistentes virtuais de Inteligência Artificial para praticar front-end.',
+          language: 'CSS',
+          languageColor: '#563d7c',
+          stars: 0,
+          forks: 0,
+          visibility: 'public',
+          url: 'https://github.com/JanaMalaquias/Fake-ChatGPT-2026'
+        },
+        {
+          id: 3,
+          name: 'Conjectura-de-Collatz--2026',
+          description: 'Aplicação em JavaScript para explorar a Conjectura de Collatz e demonstrar lógica de programação.',
+          language: 'JavaScript',
+          languageColor: '#f1e05a',
+          stars: 0,
+          forks: 0,
+          visibility: 'public',
+          url: 'https://github.com/JanaMalaquias/Conjectura-de-Collatz--2026'
+        },
+        {
+          id: 4,
+          name: 'Jogo-da-Cobrinha',
+          description: 'Recriação do clássico jogo da cobrinha com JavaScript e Canvas API.',
+          language: 'JavaScript',
+          languageColor: '#f1e05a',
+          stars: 0,
+          forks: 0,
+          visibility: 'public',
+          url: 'https://github.com/JanaMalaquias/Jogo-da-Cobrinha'
+        },
+        {
+          id: 5,
+          name: 'aws-s3-backup-automation',
+          description: 'Script de automação de backup em Python com Boto3 para enviar arquivos compactados ao S3.',
+          language: 'Python',
+          languageColor: '#3572A5',
+          stars: 0,
+          forks: 0,
+          visibility: 'public',
+          url: 'https://github.com/JanaMalaquias/aws-s3-backup-automation'
+        },
+        {
+          id: 6,
+          name: 'janainawolf.github.io',
+          description: 'Página pessoal hospedada no GitHub Pages com projetos e informações de perfil.',
+          language: 'HTML',
+          languageColor: '#e34c26',
+          stars: 0,
+          forks: 0,
+          visibility: 'public',
+          url: 'https://github.com/JanaMalaquias/janainawolf.github.io'
+        }
+      ];
+
+      const grid = document.getElementById('repoGrid');
+
+      // Atualizar contador
+      const titleSpan = document.querySelector('.section-title span');
+      if (titleSpan) {
+        const publicCount = repos.filter(r => r.visibility === 'public').length;
+        titleSpan.textContent = `${repos.length} projetos · ${publicCount} públicos`;
+      }
+
+      // Gerar cartões
+      let cardsHTML = '';
+      repos.forEach(repo => {
+        const description = repo.description || 'Sem descrição disponível.';
+        const visibilityIcon = repo.visibility === 'private' 
+          ? '<i class="fas fa-lock" style="font-size: 0.6rem;"></i>' 
+          : '<i class="fas fa-globe" style="font-size: 0.6rem;"></i>';
+        const langColor = repo.languageColor || '#cccccc';
+
+        cardsHTML += `
+          <div class="repo-card">
+            <div class="repo-header">
+              <div class="repo-name">
+                <i class="fab fa-github-alt"></i> ${repo.name}
+              </div>
+              <div class="repo-visibility">
+                ${visibilityIcon} ${repo.visibility}
+              </div>
+            </div>
+            <div class="repo-description">
+              ${description}
+            </div>
+            <div class="repo-meta">
+              <div class="repo-stats">
+                <span>
+                  <span class="lang-color" style="background: ${langColor};"></span>
+                  ${repo.language || 'N/A'}
+                </span>
+                <span><i class="far fa-star"></i> ${repo.stars}</span>
+                <span><i class="fas fa-code-branch"></i> ${repo.forks}</span>
+              </div>
+            </div>
+            <div class="repo-link">
+              <a href="${repo.url}" target="_blank"><i class="fas fa-arrow-right"></i> ver repositório</a>
+            </div>
+          </div>
+        `;
+      });
+
+      grid.innerHTML = cardsHTML;
+
+      // ---- FALLBACK PARA O AVATAR ----
+      // Se a imagem não carregar, exibe o ícone de fallback
+      const avatarImg = document.getElementById('userAvatar');
+      if (avatarImg) {
+        // Tenta carregar a imagem, se falhar, mostra o fallback
+        avatarImg.onerror = function() {
+          // Cria o fallback com ícone
+          const wrapper = this.closest('.avatar');
+          if (wrapper) {
+            // Remove a imagem e coloca o ícone
+            wrapper.innerHTML = `<div class="fallback-icon"><i class="fas fa-user-astronaut"></i></div>`;
+          }
+        };
+        // Se a imagem já estiver com erro (ex: src inválido), força o fallback
+        if (!avatarImg.complete || avatarImg.naturalWidth === 0) {
+          // Pequeno delay para garantir que o onerror seja acionado se necessário
+          setTimeout(() => {
+            if (!avatarImg.complete || avatarImg.naturalWidth === 0) {
+              const wrapper = avatarImg.closest('.avatar');
+              if (wrapper) {
+                wrapper.innerHTML = `<div class="fallback-icon"><i class="fas fa-user-astronaut"></i></div>`;
+              }
+            }
+          }, 100);
+        }
+      }
+
+    })();
+  </script>
+</body>
+</html>
